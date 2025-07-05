@@ -1,0 +1,240 @@
+* Change resolution and scaling for CS GO
+nvidia-settings --assign CurrentMetaMode="HDMI-0: 1920x1080 { ViewPortIn=1400x1050, ViewPortOut=1440x1080+240+0 }"
+
+** Revert to normal
+nvidia-settings --assign CurrentMetaMode="HDMI-0: nvidia-auto-select"
+
+* Add Guest with any Password use - U6aMy0wojraho
+sudo useradd -m -p U6aMy0wojraho Guest
+
+** Verify
+sudo gedit /etc/shadow
+
+* Enable Sound
+alsamixer #Increase value for Line In or all
+
+* Add Application to Launcher
+ln -s /media/tejas/2848D21748D1E39A/Data/Linux/linux.desktop ~/.local/share/applications
+
+* Find Icons
+sudo find -iname *.ico
+
+* Add Slow Boot
+sudo systemctl edit apt-daily.timer
+	[Timer]
+	OnBootSec=15min
+	OnUnitActiveSec=1d
+	AccuracySec=1h
+	RandomizedDelaySec=30min
+
+* Adjust Hardware time to local timezone
+timedatectl
+
+** RTC time in the local time zone
+timedatectl set-local-rtc 1
+
+** RTC in UTC:
+timedatectl set-local-rtc 0
+
+* Automount NTFS D drive
+sudo mkdir -p /media/D
+
+** Get UUID for the drive:
+blkid
+
+** Add drive in fstab:
+blkid
+sudo nano /etc/fstab
+UUID=6EA413C8A4139227 /media/D ntfs-3g defaults,locale=utf8,x-udisks-auth,x-gvfs-name=D 0 0
+UUID=C49A584A9A583B5E /media/E ntfs-3g defaults,locale=utf8,x-udisks-auth,x-gvfs-name=E 0 0
+UUID=EA3E7A643E7A2A29 /media/G ntfs-3g defaults,locale=utf8,x-udisks-auth,x-gvfs-name=G 0 0
+
+* Dash to Dock "Show Applications"
+gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button true
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top false
+
+* DD iso in USB with progress
+sudo dd bs=4M if=file.iso of=/dev/sde status=progress
+
+* Auto-Mute headphones
+echo 0 > /sys/module/snd_hda_intel/parameters/power_save
+echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+
+sudo vim /etc/modprobe.d/audio_disable_powersave.conf
+	options snd_hda_intel power_save=1
+
+* Install Japanese fonts
+sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts
+
+* Installing new Kernel - linux-tkg-pds-skylake
+pacman -Q | grep headers
+sudo pacman - S linux-tkg-pds-skylake-headers
+dkms status
+
+* Update OS name for GRUB
+sudo nano /etc/default/grub
+** Change property
+GRUB_DISTRIBUTOR
+
+
+* Mount NTFS drive
+sudo pacman -S ntfs-3g
+sudo mkdir -p /media/D
+sudo ntfs-3g /dev/sdb2 /media/D
+
+
+* Install Arch Theme and Icons
+sudo pacman -S arc-gtk-theme
+sudo pacman -S arc-icon-theme
+
+* Auto login User
+sudo groupadd -r autologin
+sudo gpasswd -a tejas autologin
+
+* In LightDM
+sudo nano /etc/lightdm/lightdm.conf
+	[Seat:*]
+	autologin-user=tejas
+
+
+* Install Microsoft fonts
+sudo mkdir -p /media/C
+sudo mount /dev/sda2 /media/C
+sudo cp /media/C/Windows/Fonts/* /media/D/Data/Linux/Arch/WindowsFonts/
+sudo ln -s /media/D/Data/Linux/Arch/WindowsFonts/ /usr/share/fonts/WindowsFonts
+sudo fc-cache --force
+
+* Install NERDTree in VIM
+mkdir -p .vim/pack/vendor/start/nerdtree
+git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
+vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c q
+
+** Open NERDTree
+vim
+:NERDTree
+
+* Symbolic Links for Config
+ln -s /media/D/Data/Linux/tejas/.config/mpv/ /home/tejas/.config/
+ln -s /media/D/Data/Linux/tejas/.config/alacritty/ /home/tejas/.config/
+ln -s /media/D/Data/Linux/tejas/.icons /home/tejas/
+ln -s /media/D/Data/Linux/tejas/.vimrc /home/tejas/
+
+* Autologin SDDM
+sudo vim /etc/sddm.conf.d/autologin.conf
+	[Autologin]
+	User=tejas
+	Session=plasma.desktop
+
+* Fix " no back-end found" in KDE Discover
+sudo pacman -S packagekit-qt5
+
+* Change default Shell to zsh (oh-my-zsh)
+sudo pacman -S zsh
+chsh -l
+chsh -s /bin/zsh
+
+** Install zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+** Only on first install, if .zshrc not from git
+echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc
+
+** Install zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+** Only on first install, if .zshrc not from git
+echo 'source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
+
+** powerlevel10k theme for zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+sudo cp /media/D/Data/Linux/Arch/MesloNerdFont/* /usr/share/fonts/TTF/
+
+** Only on first install, if .zshrc not from git
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+
+* Manage DotFiles in GIT
+git init --bare ~/.dotfiles
+alias gitd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+gitd config status.showUntrackedFiles no
+
+git remote add origin git@gitlab.com:tejassaple/dotfiles.git
+
+** On new install
+git clone --separate-git-dir=$HOME/.dotfiles git@gitlab.com:tejassaple/dotfiles.git $HOME/.dotfiles_tmp/
+rm -r $HOME/.dotfiles_tmp/
+alias gitd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+gitd config --local status.showUntrackedFiles no
+
+* Install Emacs and Doom Emacs
+sudo pacman -S emacs ripgrep fd
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+
+** Fullscreen on start-up
+sudo vim /home/tejas/.doom.d/init.el
+	  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+* Set Emacs Daemon and EmacsClient
+Add 'emacs --daemon' as Startup Application
+Add 'emacsclient -c -a "emacs"' as Shortcut
+
+
+* GRUB Theme - breeze
+
+** Download from git
+** Copy the "breeze" directory to a location - /usr/share/grub/themes/breeze/
+https://github.com/gustawho/grub2-theme-breeze
+
+sudo vim /etc/default/grub
+	GRUB_THEME="/usr/share/grub/themes/breeze/theme.txt"
+	GRUB_GFXMODE=1920x1080x32
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+* Copy "Plasma-dark"
+https://www.gnome-look.org/p/1195799/
+
+* Install from AUR git
+git clone https://aur.archlinux.org/peruse-git.git
+cd peruse-git
+makepkg -sirc
+
+* Arch not Starting after update possibly because of outdated Nvidia drivers
+** Sort 10 latest mirrors based on rate
+sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syyu
+
+* Error "os-prober will not be executed to detect other bootable partitions."
+sudo vim /etc/default/grub
+      GRUB_DISABLE_OS_PROBER=false
+
+* Slow internet speed
+** check value with
+sysctl net.ipv4.tcp_ecn
+** If value is not 0, then set it 0
+sudo sysctl net.ipv4.tcp_ecn=0
+** For every boot
+sudo vim /etc/sysctl.conf
+    net.ipv4.tcp_ecn = 0
+
+* Installing Pipewire
+sudo pacman -S pipewire
+sudo pacman -S pipewire-pulse
+systemctl restart --user pulseaudio
+systemctl restart --user pipewire-pulse
+
+** Check if Piperwire is running
+pactl info
+
+* Update .bashrc to directly boot into Windows with cmd wboot, where 2 is Windows on GRUB menu
+alias wboot='sudo grub-reboot 2 && reboot'
+
+* Fix issues in arch for Hyprland
+** Fix Corne battery py  script error - ModuleNotFoundError: No module named 'dbus_next'
+sudo pacman -S python-dbus-next
+
+** Fix notify-send: not found, volume not updatng with mako notif
+sudo pacman -S libnotify pamixer
+
+** Fix icons in waybar
+sudo pacman -S  ttf-font-awesome

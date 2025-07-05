@@ -1,0 +1,19 @@
+[user]
+	email = 150418937+rurounisnake@users.noreply.github.com
+	name = rurounisnake
+[alias]
+	lg = log --oneline -5
+	clearall= checkout -- .
+	df = diff --cached
+	cleanall = clean -fx
+	dff = diff --name-status HEAD^ HEAD
+	dfc = diff HEAD^ HEAD
+	addm = add -u .
+[core]
+	autocrlf = false
+[safe]
+	directory = D:/Data/Games/gamesaves
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
