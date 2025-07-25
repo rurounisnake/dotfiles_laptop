@@ -8,18 +8,20 @@
 
 "modules-left": ["custom/launcher","hyprland/workspaces"],
 "modules-center": ["hyprland/window"],
-"modules-right":  ["tray","custom/tailscale","battery","pulseaudio","custom/date","clock"],
+"modules-right":  ["tray","backlight","custom/tailscale","battery","pulseaudio","custom/date","clock"],
 
 "battery": {
+  "interval": 30,
   "states": {
   "warning": 30,
   "critical": 15
   },
-  "format": " &#8239;{capacity}%",
-  "format-full": "  &#8239;{capacity}%",
-  "format-charging": "  &#8239;{capacity}%",
-  "format-plugged": "  &#8239;{capacity}%",
-  "format-icons": ["", "", "", "", "", "", ""]
+  "format": "{icon}    {capacity}%",
+  "format-full": "{icon}    {capacity}%",
+  "format-charging": "    {capacity}%",
+  "format-plugged": "    {capacity}%",
+  "format-icons": ["", "", "", "", ""],
+  "on-click": "gnome-power-statistics"
 },
 "hyprland/workspaces": {
      "sort-by-name": true,
@@ -104,7 +106,7 @@
 },
 "backlight": {
     // "device": "acpi_video1",
-    "format": "{icon}&#8239;{percent}%",
+    "format": "{icon}  &#8239;{percent}%",
     "format-icons": ["", ""],
     "on-scroll-down": "brightnessctl -c backlight set 1%-",
     "on-scroll-up": "brightnessctl -c backlight set +1%"
@@ -115,7 +117,7 @@
   "format": "{icon}    {volume}%",
   "format-bluetooth": "{icon} {volume}% {format_source}",
   "format-bluetooth-muted": " {format_source}",
-  "format-muted": "  {format_source}",
+  "format-muted": " ",
   "format-source": "  {volume}%",
   "format-source-muted": "",
   "format-icons": {
