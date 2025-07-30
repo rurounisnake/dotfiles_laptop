@@ -7,7 +7,7 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=autoiikkk'
-PS1='\W > '
+PS1='$(whoami)@$(pwd) > '
 
 alias wboot='sudo grub-reboot 2 && reboot'
 alias hypr='vim ~/.config/hypr/hyprland.conf'
