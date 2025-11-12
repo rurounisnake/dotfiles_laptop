@@ -112,3 +112,9 @@ alias files='nautilus admin:///usr/'
 alias vi=vim
 alias cortana='ssh -i /home/tejas/.ssh/homelab cortana'
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/tejas/.dart-cli-completion/zsh-config.zsh ]] && . /home/tejas/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

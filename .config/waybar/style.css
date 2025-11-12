@@ -32,7 +32,7 @@ window#waybar {
 }
 
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(100, 114, 125, 0.5);
 }
 tooltip label {
@@ -71,5 +71,5 @@ tooltip label {
     font-weight: 600;
 }
 #tray menu {
-  background-color: transparent;
+  background: rgba(0, 0, 0, 0.4);
 }
