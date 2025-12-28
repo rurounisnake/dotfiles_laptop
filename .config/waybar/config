@@ -1,6 +1,6 @@
 {
-"layer": "overlay",
-"mode": "overlay",
+//"layer": "overlay",
+// "mode": "overlay",
 "position": "bottom",
 "height": 23,
 "margin": 0,
