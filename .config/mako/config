@@ -1,15 +1,50 @@
-# Colors
-
-background-color=#1e1e2e
-text-color=#cdd6f4
-border-color=#89b4fa
-progress-color=over #313244
-
+font=SF Mono 10
+#background-color=#282a36
+background-color=#101010C0
+text-color=#ffffffff
+#border-color=#282a36
+border-size=0
+border-radius=11
 default-timeout=2000
 ignore-timeout=1
 
-layer=overlay
+[urgency=low]
+border-color=#282a36
+
+[urgency=normal]
+border-color=#f1fa8c
 
 [urgency=high]
-border-color=#fab387
+border-color=#ff5555
 
+[app-name=wp-vol]
+layer=overlay
+history=0
+anchor=top-center
+# Group all volume notifications together
+group-by=app-name
+# Hide the group-index
+format=<b>%s</b>\n%b
+
+[app-name=volume group-index=0]
+# Only show last notification
+invisible=0
+
+[app-name=sys-status]
+layer=overlay
+history=0
+anchor=bottom-right
+
+[app-name=wp-mic]
+layer=overlay
+history=0
+anchor=top-center
+# Group all volume notifications together
+group-by=app-name
+
+[app-name=wp-mute]
+layer=overlay
+history=0
+anchor=top-center
+# Group all volume notifications together
+group-by=app-name
