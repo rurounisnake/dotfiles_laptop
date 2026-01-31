@@ -1,0 +1,46 @@
+"Mapleader to space
+let mapleader=" "
+
+"set clipboard=unnamed
+set number relativenumber
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+set surround
+set ignorecase
+set smartcase
+set incsearch
+
+"Split Line in Normal mode
+nnoremap <Enter> i<Enter><Esc>k$
+
+"Open Terminal
+" nnoremap <leader>t <C-Tab>t
+" nnoremap <leader>v "Op
+" vnoremap <leader>v "0p
+
+"system clipboard
+vmap <leader>y "*y
+vmap <leader>d "*d
+nmap <leader>y "*yy
+nmap <leader>p "*p
+nmap <leader>P "*P
+vmap <leader>p "*p
+vmap <leader>P "*P
+
+"Actions
+map <leader>h <Action>(PreviousTab)
+map <leader>l <Action>(NextTab)
+map <leader>q <Action>(CloseEditor)
+map <leader>i <Action>(Generate)
+map <leader>s <Action>(QuickChangeScheme)
+map <leader>/ <Action>(ShowErrorDescription)
+map <leader>e <Action>(GotoNextError)
+map <leader><Tab> <Action>(Switcher)
+map <leader>g <Action>(GotoLine)
+map <S-f> <Action>(Find)
+map <S-r> <Action>(Replace)
+
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'

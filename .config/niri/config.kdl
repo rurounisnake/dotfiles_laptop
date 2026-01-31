@@ -6,6 +6,7 @@
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
+workspace "browser"
 prefer-no-csd
 input {
     keyboard {
@@ -270,6 +271,10 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "waybar"
+//spawn-sh-at-startup "swaybg -c 000000 -i /home/tejas/Downloads/wallpaper/image.jpeg.7fe76fcda54784168c252e06fb860266.jpeg"
+spawn-sh-at-startup "swaybg -c 000000 -i /home/tejas/Downloads/wallpaper/Gemini_Generated_Image_c61gvic61gvic61g.png"
+spawn-sh-at-startup "~/.config/hypr/scripts/system-status.sh"
+spawn-sh-at-startup "hyprsunset"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -329,7 +334,8 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Zen Browser"
+    match app-id="zen"
+    open-on-workspace "browser"
     open-maximized true
 }
 
@@ -376,7 +382,7 @@ binds {
     // Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+T hotkey-overlay-title="Open a Terminal: Ghoshtty" { spawn "ghostty"; }
     //Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi -show drun"; }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "rofi -show drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -406,7 +412,8 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+O repeat=false { toggle-overview; }
+    //Mod+O repeat=false { toggle-overview; }
+    Mod+O { spawn "obsidian";  }
 
     Mod+Q repeat=false { close-window; }
 
@@ -632,4 +639,7 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     Mod+S { spawn-sh "~/.config/hypr/scripts/system-status.sh";}
+    Mod+B hotkey-overlay-title="Run an Application: Zen Browser" { spawn "zen-browser"; }
+    Mod+E hotkey-overlay-title="Run an Application: Files" { spawn "nautilus"; }
+    Mod+Space repeat=false { toggle-overview; }
 }

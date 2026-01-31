@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias wboot='sudo grub-reboot 2 && reboot'
 alias hypr='vim ~/.config/hypr/hyprland.conf'
+alias niric='vim ~/.config/niri/config.kdl'
 alias gitd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias corne='python ~/.config/waybar/zmk_split-battery_waybar.py'
 alias corne='python ~/.config/waybar/zmk_split-battery_waybar.py'
@@ -118,3 +119,4 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f /home/tejas/.dart-cli-completion/zsh-config.zsh ]] && . /home/tejas/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+export EDITOR='vim'

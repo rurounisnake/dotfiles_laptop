@@ -5,4 +5,18 @@
 
 //@theme "/usr/share/rofi/themes/material.rasi"
 
-@theme "/home/tejas/.local/share/rofi/themes/spotlight.rasi"
+configuration {
+	combi-modes: [drun,filebrowser];
+}
+
+//@theme "/home/tejas/.local/share/rofi/themes/spotlight.rasi"
+//@theme "/home/tejas/.local/share/rofi/themes/style-1.rasi"
+
+
+//@theme "/home/tejas/.local/share/rofi/themes/spotlight-dark.rasi"
+
+//@theme "/home/tejas/.local/share/rofi/themes/style-1.rasi"
+
+//@theme "/home/tejas/.local/share/rofi/themes/spotlight-dark.rasi"
+
+@theme "/home/tejas/.local/share/rofi/themes/style-1.rasi"
