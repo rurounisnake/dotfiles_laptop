@@ -104,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias wboot='sudo grub-reboot 2 && reboot'
-alias hypr='vim ~/.config/hypr/hyprland.conf'
+alias hypr='vim ~/.config/hypr/hyprland.lua'
 alias niric='vim ~/.config/niri/config.kdl'
 alias gitd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias corne='python ~/.config/waybar/zmk_split-battery_waybar.py'

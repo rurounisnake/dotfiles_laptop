@@ -27,3 +27,6 @@ nmap <leader>p "*p
 nmap <leader>P "*P
 vmap <leader>p "*p
 vmap <leader>P "*P
+
+"remap @-key
+nmap <Space>m @
