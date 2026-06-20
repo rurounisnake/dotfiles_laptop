@@ -1,75 +1,53 @@
-*{
-    font-family: "SF Pro Display", sans-serif, font-awesome;
-    font-size: 14px;
-    color: white;
-    background: transparent;
-}
-
+/* Global bar setup */
 window#waybar {
-    background-color: transparent;
-    padding: 4px 10px;
-    margin: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    /* Configured with SF Pro Display alongside standard modern system sans fallbacks */
+    font-family: "SF Pro Display", "-apple-system", "BlinkMacSystemFont", "Inter", "Sans-Serif";
+    font-size: 14px;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
 }
 
-#workspaces{
-    margin-top: 3px;
-    margin-bottom: 2px;
-    margin-right: 10px;
-    margin-left: 25px;
+/* LEFT: Workspace indicator layout mimicking your QML pill layout */
+#workspaces {
+    background-color: #222222;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 11px;
 }
 
-#workspaces button{
-    border-radius: 15px;
-    margin-right: 10px;
-    padding: 1px 10px;
-    font-weight: bolder;
-    background-color: transparent;
-}
-
-#workspaces button.active, #workspaces button.focused{
-    padding: 0 22px;
-    box-shadow: 0px 5px 10px 0px rgba(1, 1, 1, 0.5);
-}
-
-tooltip {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(100, 114, 125, 0.5);
-}
-tooltip label {
-  color: white;
-}
-
-#tray
-#custom-weather,
-#cpu, 
-#temperature, 
-#memory,
-#sway-mode,
-#backlight, 
-#pulseaudio, 
-#custom-vpn,
-#disk,
-#custom-recorder,
-#custom-audiorec,
-#battery, 
-#network,
-#custom-date,
-#clock {
-    color: white;
+#workspaces button {
+    color: #ffffff;
     font-size: 13px;
+    font-weight: 700; /* Bold weight for the focused digit */
+    padding: 0;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+}
+
+/* CENTER: 24-hour time text */
+#clock {
+    font-size: 15px;
     font-weight: 700;
 }
 
-#custom-launcher {
-    color: white;
-    padding: 0 0 0 13px;
-    font-size: 23px;
+/* Adjusts icon sizes specifically so they render cleanly */
+#network, #bluetooth {
+    font-size: 15px;
 }
 
-#custom-text {
-    padding-left: 1px;
-    font-weight: 600;
+/* Mutes disconnected indicator status down to #555555 color state */
+#network.disconnected, #bluetooth.off, #bluetooth.disabled {
+    color: #555555;
 }
-#tray menu {
-  background: rgba(0, 0, 0, 0.4);
+
+#custom-battery-sysfs {
+    font-size: 14px;
+    font-weight: 500;
 }

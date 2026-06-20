@@ -643,3 +643,7 @@ binds {
     Mod+E hotkey-overlay-title="Run an Application: Files" { spawn "nautilus"; }
     Mod+Space repeat=false { toggle-overview; }
 }
+
+include "dms/outputs.kdl"
+
+include "dms/cursor.kdl"

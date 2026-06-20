@@ -19,4 +19,10 @@ configuration {
 
 //@theme "/home/tejas/.local/share/rofi/themes/spotlight-dark.rasi"
 
-@theme "/home/tejas/.local/share/rofi/themes/style-1.rasi"
+//@theme "/home/tejas/.local/share/rofi/themes/style-1.rasi"
+
+//@theme "/home/tejas/.local/share/rofi/themes/spotlight-dark.rasi"
+
+//@theme "/home/tejas/.local/share/rofi/themes/rounded-blue-dark.rasi"
+
+@theme "/home/tejas/.local/share/rofi/themes/macos.rasi"

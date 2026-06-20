@@ -57,3 +57,4 @@ background-blur = true
 shell-integration = zsh
 #theme = Apple System Colors
 theme = iTerm2 Default
+window-decoration = false

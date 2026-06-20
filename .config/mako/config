@@ -20,7 +20,7 @@ border-color=#ff5555
 [app-name=wp-vol]
 layer=overlay
 history=0
-anchor=top-center
+anchor=bottom-center
 # Group all volume notifications together
 group-by=app-name
 # Hide the group-index

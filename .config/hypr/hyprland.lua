@@ -15,13 +15,19 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- hl.monitor({
+--     output   = "",
+--     mode     = "preferred",
+--     position = "auto",
+--     scale    = "1",
+-- })
 hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = "1",
+  output = "eDP-1",
+  mode = "1920x1080@60",
+  position = "0x0",
+  scale = 1,
+  icc = "/usr/share/color/icc/edid-a0a53a9971c862062d000b40e8df4f9f.icc",
 })
-
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -45,14 +51,21 @@ local text        = "gnome-text-editor"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-   hl.exec_cmd("tailscale up")
-   hl.exec_cmd("nm-applet")
-   hl.exec_cmd("waybar")
    hl.exec_cmd("hyprpaper")
+   --hl.exec_cmd("awww-daemon")
+   --hl.exec_cmd("awww img 007FirstLight_AnimatedWallpaper.gif")
+   --hl.exec_cmd("mpvpaper -o 'no-audio --loop-playlist shuffle' ALL ~/Downloads/wallpaper/steam-delivery-girl-winter-sale-2024-moewalls-com.mp4")
+   --hl.exec_cmd("tailscale up")
+   --hl.exec_cmd("tide-island")
+   --hl.exec_cmd("quickshell --path ~/.config/quickshell/gnome-bar/shell.qml")
+   --hl.exec_cmd("nm-applet")
+   hl.exec_cmd("waybar")
    hl.exec_cmd("udiskie &")
    hl.exec_cmd("hyprsunset")
-   hl.exec_cmd("/home/tejas/.config/hypr/scripts/system-status.sh")
-   hl.exec_cmd("swaync")
+   --hl.exec_cmd("/home/tejas/.config/hypr/scripts/system-status.sh")
+   hl.exec_cmd("/home/tejas/.config/hypr/scripts/battery_alert.sh")
+   --hl.exec_cmd("swaync")
+   hl.exec_cmd("hyprpm reload")
 end)
 
 
@@ -212,8 +225,8 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
 
@@ -254,6 +267,11 @@ hl.device({
     sensitivity = -0.5,
 })
 
+hl.config({
+    input = {
+        numlock_by_default = true,
+    },
+})
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -268,7 +286,7 @@ local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 --
@@ -324,9 +342,9 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd("~/.config/hypr/scripts/volume --toggle
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s +10%"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { locked = true, repeating = true })
 
---hl.bind("Print", hl.dsp.exec_cmd("grim -g '$(slurp)'), { locked = true, repeating = true })
+hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\""))
 
-hl.bind(mainMod .. " + S",         hl.dsp.exec_cmd("~/.config/hypr/scripts/system-status.sh"))
+--hl.bind(mainMod .. " + S",         hl.dsp.exec_cmd("~/.config/hypr/scripts/system-status.sh"))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
@@ -383,3 +401,15 @@ hl.window_rule({ match = { class = "obsidian" }, workspace = "1" })
 hl.window_rule({ match = { class = "rofi" }, float = true })
 hl.window_rule({ match = { title = "^Yazi:.*" }, workspace = "3" })
 hl.window_rule({ match = { title = "^(Picture-in-Picture|zen)$" }, float = true, size = "400 255", move = "1520 855", pin = true })
+
+hl.bind(mainMod .. " + S", function() hl.plugin.hymission.toggle("onlycurrentworkspace") end)
+
+hl.plugin.hymission.gesture({
+    fingers = 3,
+    direction = "vertical",
+    action = "toggle",
+    args = "forceall",
+})
+
+--hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc -p /usr/share/tide-island call overview toggle"))
+--hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc -p /usr/share/tide-island call tide toggleControlCenter"))

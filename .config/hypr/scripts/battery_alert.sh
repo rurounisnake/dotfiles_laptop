@@ -16,9 +16,11 @@ while true; do
     # If discharging and below thresholds
     if [ "$STATE" = "Discharging" ]; then
         if [ "$PERCENTAGE" -le "$CRITICAL_BATTERY" ]; then
-            notify-send -t 5000 -u normal "Critical Battery" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery is at ${PERCENTAGE}%! Plug in now."
+            # notify-send -t 5000 -u normal "Critical Battery" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery is at ${PERCENTAGE}%! Plug in now."
+            notify-send -t 5000 -u normal "" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery: ${PERCENTAGE}%!."
         elif [ "$PERCENTAGE" -le "$LOW_BATTERY" ]; then
-            notify-send -t 5000 -u normal "Low Battery" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery is at ${PERCENTAGE}%."
+            # notify-send -t 5000 -u normal "Low Battery" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery is at ${PERCENTAGE}%."
+            notify-send -t 5000 -u normal "" --icon=/usr/share/icons/MacTahoe/status/16/battery-low.svg "Battery: ${PERCENTAGE}%"
         fi
     fi
 
